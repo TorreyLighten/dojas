@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type= "text/css" href="../static/styles.css">
+    {% load static %}
+</head>
+<body>
+    <div>
+        <p>Add a Dojo</p>
+        <form action='/postdojo' form='post'>
+            {% csrf_token %}
+            <label for="name">Dojo:</label>
+            <input type="text" id="name" name="name">
+            <label for="last_name">Last name:</label>
+            <input type="text" id="last_name" name="last_name"><br>
+            <label for="email">email:</label>
+            <input type="text" id="email" name="email">
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age"><br>
+            <input type="submit" value="add">
+            
+        </form>
+    </div>
+    <div>
+        <p>Add a Ninja
+            <form action='/postdojo' form='post'>
+                {% csrf_token %}
+                <label for="name">name:</label>
+                <input type="text" id="name" name="name">
+                <label for="city">Last name:</label>
+                <input type="text" id="city" name="city">
+                <label for="state">Age:</label>
+                <input type="text" id="state" name="state"><br>
+                <input type="submit" value="add">
+            </form>
+        </p>
+        <form action='/postninja' form='post'>
+            {% csrf_token %}
+            <label for="first_name">First name:</label>
+            <input type="text" id="first_name" name="first_name">
+            <label for="last_name">Last name:</label>
+            <input type="text" id="last_name" name="last_name">
+            <select id="dojo_location" name="Dojo Location">
+                {% for Dojo in Dojo %}
+                <option value="{{Dojo}}">{{Dojo.name}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="add">
+        </form>
+    </div>
+    <div>
+        <h3>All the Dojos</h3>
+            {% for Dojo in Dojo %}
+            <ul>{{dojo}}
+                {% for Ninja in Ninja %}
+                <li>{{ninja}}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+    </div>
+</body>
+</html>

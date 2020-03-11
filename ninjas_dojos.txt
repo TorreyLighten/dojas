@@ -1,0 +1,72 @@
+>>> Dojo1 = Dojo.objects.create(name='Bella', city='bellevue', state='WA')
+>>> Dojo2 = Dojo.objects.create(name='Professor', city='oakland', state='CA')
+>>> Dojo3 = Dojo.objects.create(name='In-The-Hood', city='boise', state='ID')
+>>>
+
+>>> move_to_delete = Dojo.objects.get(id=1)
+>>> move_to_delete.delete()
+(1, {'dojo_ninjas_app.Dojo': 1})
+>>> move_to_delete = Dojo.objects.get(id=2)
+>>> move_to_delete.delete()
+(1, {'dojo_ninjas_app.Dojo': 1})
+>>> move_to_delete = Dojo.objects.get(id=3)
+>>> move_to_delete.delete()
+(1, {'dojo_ninjas_app.Dojo': 1})
+>>>
+
+>>> Dojo1 = Dojo.objects.create(name='Bella', city='bellevue', state='WA')
+>>> Dojo2 = Dojo.objects.create(name='Professor', city='oakland', state='CA')
+>>> Dojo3 = Dojo.objects.create(name='In-The-Hood', city='boise', state='ID')
+>>>
+
+>>> torrey = Ninja.objects.create(first_name="Torrey", last_name="Johnson", dojo_location=Dojo.objects.get(id=5))
+>>> tash = Ninja.objects.create(first_name="Tashtego", last_name="Dutton", dojo_location=Dojo.objects.get(id=5))
+>>> becky = Ninja.objects.create(first_name="Rebecca", last_name="Betts", dojo_location=Dojo.objects.get(id=5))
+>>>
+
+>>> tors = Ninja.objects.create(first_name="Torbrin", last_name="Johnson", dojo_location=Dojo.objects.get(id=6))
+>>> tasha = Ninja.objects.create(first_name="Tashnesa", last_name="Dutton", dojo_location=Dojo.objects.get(id=6))
+>>> becko = Ninja.objects.create(first_name="Reberto", last_name="Betts", dojo_location=Dojo.objects.get(id=6))
+>>>
+
+>>> torC = Ninja.objects.create(first_name="Torll", last_name="Clinton", dojo_location=Dojo.objects.get(id=7))
+>>> tashC = Ninja.objects.create(first_name="Tall", last_name="Clinton", dojo_location=Dojo.objects.get(id=7))
+>>> beckC = Ninja.objects.create(first_name="Bilecca", last_name="Clinton", dojo_location=Dojo.objects.get(id=7))
+>>>
+
+>>> Ninja.objects.filter(dojo_location__id=5)
+<QuerySet [<object: Torrey Johnson (Dojo object (5))>, <object: Tashtego Dutton (Dojo object (5))>, <object: Rebecca Betts (Dojo object (5))>]>
+>>>
+
+>>> Ninja.objects.filter(dojo_location__id=7)
+<QuerySet [<object: Torll Clinton (Dojo object (7))>, <object: Tall Clinton (Dojo object (7))>, <object: Bilecca Clinton (Dojo object (7))>]>
+>>>
+
+>>> Ninja.objects.last().dojo_location.name
+'In-The-Hood'
+>>>
+
+(python3env) C:\Users\stacl\Desktop\Coding_Dojo\Python\Django\django_orm\dojo_ninjas_proj>python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojo without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> "old dojo"
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app\migrations\0004_dojo_desc.py
+    - Add field desc to dojo
+
+(python3env) C:\Users\stacl\Desktop\Coding_Dojo\Python\Django\django_orm\dojo_ninjas_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying dojo_ninjas_app.0004_dojo_desc... OK
+
+
+>>> from dojo_ninjas_app.models import *
+>>> Dojo4 = Dojo.objects.create(name="Nikoli",city="Tulsa",state="OK",desc="old dojo")
+>>>
